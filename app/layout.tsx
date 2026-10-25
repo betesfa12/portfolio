@@ -1,10 +1,9 @@
 import type { Metadata } from "next";
-import { Bricolage_Grotesque, Noto_Sans_Ethiopic } from "next/font/google";
+import { Bricolage_Grotesque } from "next/font/google";
 import { profile } from "@/lib/data";
 import "./globals.css";
 
 const display = Bricolage_Grotesque({ subsets: ["latin"], variable: "--font-display", display: "swap" });
-const body = Noto_Sans_Ethiopic({ subsets: ["ethiopic", "latin"], variable: "--font-body", display: "swap" });
 
 export const metadata: Metadata = {
   title: `${profile.name} — ${profile.title}`,
@@ -15,7 +14,7 @@ const themeScript = `try{var t=localStorage.getItem("theme");if(!t){t=matchMedia
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="am" className={`${display.variable} ${body.variable}`} suppressHydrationWarning>
+    <html lang="en" className={display.variable} suppressHydrationWarning>
       <head><script dangerouslySetInnerHTML={{ __html: themeScript }} /></head>
       <body>{children}</body>
     </html>

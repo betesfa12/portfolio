@@ -16,8 +16,13 @@ export default function ThemeToggle() {
   }
 
   return (
-    <button className="toggle" onClick={toggle} aria-label="ብሩህ/ጨለማ ገጽታ ቀይር">
-      {theme === "dark" ? "ብሩህ ገጽታ" : "ጨለማ ገጽታ"}
+    <button
+      className="toggle"
+      onClick={toggle}
+      aria-label={`Switch to ${theme === "dark" ? "light" : "dark"} mode`}
+      aria-pressed={theme === "dark"}
+    >
+      {theme === "dark" ? "Light mode" : "Dark mode"}
     </button>
   );
 }

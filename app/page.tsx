@@ -1,80 +1,123 @@
 import ThemeToggle from "@/components/ThemeToggle";
-import { profile, projects, skills, experience } from "@/lib/data";
+import { experience, profile, projects, skills } from "@/lib/data";
 
 export default function Home() {
   return (
     <>
       <header className="bar">
-        <a href="#top" className="mark">{profile.name}</a>
-        <nav aria-label="ዋና ማውጫ">
-          <a href="#work">ሥራዎች</a>
-          <a href="#about">ስለ እኔ</a>
-          <a href="#contact">አግኙኝ</a>
+        <a href="#top" className="brand" aria-label={`${profile.name} home`}>
+          <span className="brand-mark">BM</span>
+          <span>{profile.name}</span>
+        </a>
+        <nav aria-label="Main navigation">
+          <a href="#work">Projects</a>
+          <a href="#about">About</a>
+          <a href="#contact">Contact</a>
           <ThemeToggle />
         </nav>
       </header>
 
       <main id="top">
         <section className="hero">
-          <p className="role">{profile.title}</p>
-          <h1 className="name">{profile.name}</h1>
-          <p className="tagline">{profile.tagline}</p>
-          <div className="actions">
-            <a className="btn primary" href="#work">ሥራዬን ተመልከት</a>
-            <a className="btn" href={profile.cv} download>CV አውርድ</a>
+          <div className="hero-copy">
+            <p className="eyebrow"><span className="eyebrow-dot" />{profile.title}</p>
+            <h1>{profile.name}<span className="name-period">.</span></h1>
+            <p className="tagline">{profile.tagline}</p>
+            <p className="location">{profile.location}</p>
+            <div className="actions">
+              <a className="btn primary" href="#work">View my work <span aria-hidden="true">↘</span></a>
+              <a className="text-link" href={`mailto:${profile.email}`}>Get in touch <span aria-hidden="true">↗</span></a>
+            </div>
+          </div>
+          <div className="hero-art" aria-hidden="true">
+            <div className="art-orbit orbit-one" />
+            <div className="art-orbit orbit-two" />
+            <div className="art-core">B<span>.</span></div>
+            <span className="art-caption">Ideas into impact</span>
+          </div>
+          <a href="#work" className="scroll-cue"><span />Scroll to explore</a>
+        </section>
+
+        <section id="work" className="section work-section">
+          <div className="section-heading">
+            <p className="section-index">01 / Selected work</p>
+            <h2>Projects<span className="name-period">.</span></h2>
+            <p className="section-intro">A selection of things I have been building.</p>
+          </div>
+          <div className="projects">
+            {projects.map((project, index) => (
+              <article className="project-card" key={project.title}>
+                <div className="project-topline">
+                  <span className="project-number">{String(index + 1).padStart(2, "0")}</span>
+                  <span>{project.year}</span>
+                  <span className="project-role">{project.role}</span>
+                </div>
+                <h3>{project.title}</h3>
+                {project.problem && <p className="project-description">{project.problem}</p>}
+                {project.result && <p className="project-description">{project.result}</p>}
+                {project.tools && project.tools.length > 0 && (
+                  <ul className="tool-list" aria-label="Technologies">
+                    {project.tools.map((tool) => <li key={tool}>{tool}</li>)}
+                  </ul>
+                )}
+                {(project.link || project.repo) && (
+                  <div className="project-links">
+                    {project.link && <a href={project.link} target="_blank" rel="noreferrer">Visit project <span aria-hidden="true">↗</span></a>}
+                    {project.repo && <a href={project.repo} target="_blank" rel="noreferrer">View repository <span aria-hidden="true">↗</span></a>}
+                  </div>
+                )}
+              </article>
+            ))}
           </div>
         </section>
 
-        <section id="work" className="section">
-          <h2>ሥራዎች</h2>
-          <ul className="projects">
-            {projects.map((p) => (
-              <li key={p.title}>
-                <details>
-                  <summary>
-                    <span className="year">{p.year}</span>
-                    <span className="ptitle">{p.title}</span>
-                    <span className="prole">{p.role}</span>
-                  </summary>
-                  <dl className="detail">
-                    <div><dt>ችግሩ</dt><dd>{p.problem}</dd></div>
-                    <div><dt>ውጤቱ</dt><dd>{p.result}</dd></div>
-                    <div><dt>መሣሪያዎች</dt><dd>{p.tools.join("፣ ")}</dd></div>
-                    {p.link && <div><dt>ሊንክ</dt><dd><a href={p.link} target="_blank" rel="noreferrer">ፕሮጀክቱን ክፈት</a></dd></div>}
-                  </dl>
-                </details>
-              </li>
-            ))}
-          </ul>
-        </section>
-
-        <section id="about" className="section two">
-          <h2>ስለ እኔ</h2>
-          <div>
-            <p className="lead">{profile.about}</p>
-            <h3>ክህሎቶች</h3>
-            <p className="skills">{skills.join("፣ ")}</p>
-            <h3>ልምድ</h3>
-            <ul className="xp">
-              {experience.map((e) => (
-                <li key={e.period}><span>{e.period}</span><span><strong>{e.place}</strong> — {e.what}</span></li>
-              ))}
-            </ul>
+        <section id="about" className="section about-section">
+          <div className="section-heading">
+            <p className="section-index">02 / A little about me</p>
+            <h2>About<span className="name-period">.</span></h2>
+          </div>
+          <div className="about-content">
+            <p className="about-copy">{profile.about}</p>
+            <div className="about-details">
+              <div className="detail-block">
+                <h3>Skills</h3>
+                <ul className="skill-list">
+                  {skills.map((skill) => <li key={skill}>{skill}</li>)}
+                </ul>
+              </div>
+              <div className="detail-block">
+                <h3>Education</h3>
+                <ul className="education-list">
+                  {experience.map((item) => (
+                    <li key={`${item.place}-${item.period}`}>
+                      <span className="education-period">{item.period}</span>
+                      <span><strong>{item.place}</strong><br />{item.what}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
           </div>
         </section>
 
-        <section id="contact" className="section contact">
-          <h2>አብረን እንሥራ</h2>
-          <a className="mail" href={`mailto:${profile.email}`}>{profile.email}</a>
-          <p className="socials">
-            {profile.socials.map((s) => (
-              <a key={s.label} href={s.href} target="_blank" rel="noreferrer">{s.label}</a>
+        <section id="contact" className="contact-section">
+          <p className="section-index">03 / Have a project in mind?</p>
+          <h2>Let&apos;s work<br />together<span className="name-period">.</span></h2>
+          <a className="contact-link" href={`mailto:${profile.email}`}>
+            {profile.email}<span aria-hidden="true">↗</span>
+          </a>
+          <div className="socials">
+            {profile.socials.map((social) => (
+              <a key={social.label} href={social.href} target="_blank" rel="noreferrer">{social.label} <span aria-hidden="true">↗</span></a>
             ))}
-          </p>
+          </div>
         </section>
       </main>
 
-      <footer className="foot">© {new Date().getFullYear()} {profile.name}</footer>
+      <footer className="foot">
+        <span>© {new Date().getFullYear()} {profile.name}</span>
+        <a href="#top">Back to top ↑</a>
+      </footer>
     </>
   );
 }
