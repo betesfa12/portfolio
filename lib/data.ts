@@ -3,10 +3,13 @@ export type Project = {
   year: string;
   title: string;
   role: string;
+  overview?: string;
   problem?: string;
   result?: string;
   features?: string[];
   tools?: string[];
+  screenshots?: string[];
+  liveUrl?: string;
   link?: string;
   repo?: string;
 };
@@ -36,18 +39,12 @@ export const projects: Project[] = [
   },
 ];
 
-export const skills = [
-  "TypeScript",
-  "React",
-  "Next.js",
-  "Node.js",
-  "Git",
-  "NestJS",
-  "PostgreSQL",
-  "Prisma",
-  "Vite",
-  "REST APIs",
-];
+export const skills = {
+  Frontend: ["TypeScript", "React", "Next.js"],
+  Backend: ["Node.js", "NestJS", "REST APIs"],
+  Database: ["PostgreSQL", "Prisma"],
+  Tools: ["Vite", "Git"],
+};
 
 export const experience = [
   {
@@ -56,3 +53,8 @@ export const experience = [
     what: "BSc student (4th year)",
   },
 ];
+
+const configuredSiteUrl = process.env.NEXT_PUBLIC_SITE_URL?.trim();
+export const SITE_URL =
+  configuredSiteUrl?.replace(/\/+$/, "") ||
+  (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL.replace(/\/+$/, "")}` : "");
