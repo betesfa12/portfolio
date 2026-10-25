@@ -7,7 +7,6 @@ import { profile } from "@/lib/data";
 const sections = [
   { id: "work", label: "Projects" },
   { id: "about", label: "About" },
-  { id: "education", label: "Education" },
   { id: "contact", label: "Contact" },
 ];
 
@@ -16,23 +15,40 @@ export default function SiteHeader() {
   const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const visible = entries
-          .filter((entry) => entry.isIntersecting)
-          .sort((left, right) => right.intersectionRatio - left.intersectionRatio)[0];
+    let frame = 0;
 
-        if (visible) setActiveSection(visible.target.id);
-      },
-      { rootMargin: "-20% 0px -65% 0px", threshold: [0, 0.25, 0.5, 0.75, 1] },
-    );
+    function updateActiveSection() {
+      cancelAnimationFrame(frame);
+      frame = requestAnimationFrame(() => {
+        const headerHeight = document.querySelector(".bar")?.getBoundingClientRect().height ?? 0;
+        const activationLine = headerHeight + 48;
+        const lastSection = sections[sections.length - 1];
 
-    sections.forEach(({ id }) => {
-      const section = document.getElementById(id);
-      if (section) observer.observe(section);
-    });
+        if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 2) {
+          setActiveSection(lastSection.id);
+          return;
+        }
 
-    return () => observer.disconnect();
+        const currentSection = [...sections]
+          .reverse()
+          .find(({ id }) => {
+            const section = document.getElementById(id);
+            return section && section.getBoundingClientRect().top <= activationLine;
+          });
+
+        setActiveSection(currentSection?.id ?? "");
+      });
+    }
+
+    updateActiveSection();
+    window.addEventListener("scroll", updateActiveSection, { passive: true });
+    window.addEventListener("resize", updateActiveSection);
+
+    return () => {
+      cancelAnimationFrame(frame);
+      window.removeEventListener("scroll", updateActiveSection);
+      window.removeEventListener("resize", updateActiveSection);
+    };
   }, []);
 
   useEffect(() => {

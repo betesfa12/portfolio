@@ -83,27 +83,23 @@ export default function Home() {
                   ))}
                 </div>
               </div>
+              <div className="detail-block education-block">
+                <h3>Education</h3>
+                <ol className="education-timeline">
+                  {experience.map((item) => (
+                    <li key={`${item.place}-${item.period}`}>
+                      <span className="education-period">{item.period}</span>
+                      <span><strong>{item.place}</strong><br />{item.what}</span>
+                    </li>
+                  ))}
+                </ol>
+              </div>
             </div>
           </div>
         </section>
 
-        <section id="education" className="section education-section" data-reveal>
-          <div className="section-heading">
-            <p className="section-index">03 / Education</p>
-            <h2>Education<span className="name-period">.</span></h2>
-          </div>
-          <ol className="education-timeline">
-            {experience.map((item) => (
-              <li key={`${item.place}-${item.period}`}>
-                <span className="education-period">{item.period}</span>
-                <span><strong>{item.place}</strong><br />{item.what}</span>
-              </li>
-            ))}
-          </ol>
-        </section>
-
         <section id="contact" className="contact-section" data-reveal>
-          <p className="section-index">04 / Have a project in mind?</p>
+          <p className="section-index">03 / Have a project in mind?</p>
           <h2>Let&apos;s work<br />together<span className="name-period">.</span></h2>
           <div className="contact-options">
             {profile.email && (
