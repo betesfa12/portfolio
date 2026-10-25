@@ -5,9 +5,24 @@ import "./globals.css";
 
 const display = Bricolage_Grotesque({ subsets: ["latin"], variable: "--font-display", display: "swap" });
 
+const pageTitle = `${profile.name} — ${profile.title}`;
+const pageDescription = `${profile.title} in ${profile.location}. ${profile.tagline}`;
+
 export const metadata: Metadata = {
-  title: `${profile.name} — ${profile.title}`,
-  description: profile.tagline,
+  title: pageTitle,
+  description: pageDescription,
+  openGraph: {
+    title: pageTitle,
+    description: pageDescription,
+    type: "website",
+    siteName: profile.name,
+    locale: "en_US",
+  },
+  twitter: {
+    card: "summary",
+    title: pageTitle,
+    description: pageDescription,
+  },
 };
 
 const themeScript = `try{var t=localStorage.getItem("theme");if(!t){t=matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light"}document.documentElement.dataset.theme=t}catch(e){}`;

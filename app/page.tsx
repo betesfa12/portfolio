@@ -1,4 +1,5 @@
 import ThemeToggle from "@/components/ThemeToggle";
+import ProfilePortrait from "@/components/ProfilePortrait";
 import { experience, profile, projects, skills } from "@/lib/data";
 
 export default function Home() {
@@ -29,10 +30,10 @@ export default function Home() {
               <a className="text-link" href={`mailto:${profile.email}`}>Get in touch <span aria-hidden="true">↗</span></a>
             </div>
           </div>
-          <div className="hero-art" aria-hidden="true">
+          <div className="hero-art">
             <div className="art-orbit orbit-one" />
             <div className="art-orbit orbit-two" />
-            <div className="art-core">B<span>.</span></div>
+            <ProfilePortrait />
             <span className="art-caption">Ideas into impact</span>
           </div>
           <a href="#work" className="scroll-cue"><span />Scroll to explore</a>
@@ -55,6 +56,11 @@ export default function Home() {
                 <h3>{project.title}</h3>
                 {project.problem && <p className="project-description">{project.problem}</p>}
                 {project.result && <p className="project-description">{project.result}</p>}
+                {project.features && project.features.length > 0 && (
+                  <ul className="project-features" aria-label={`${project.title} features`}>
+                    {project.features.map((feature) => <li key={feature}>{feature}</li>)}
+                  </ul>
+                )}
                 {project.tools && project.tools.length > 0 && (
                   <ul className="tool-list" aria-label="Technologies">
                     {project.tools.map((tool) => <li key={tool}>{tool}</li>)}
@@ -105,9 +111,12 @@ export default function Home() {
           <h2>Let&apos;s work<br />together<span className="name-period">.</span></h2>
           <div className="contact-options">
             {profile.email && (
-              <a className="contact-link" href={`mailto:${profile.email}`}>
-                Email me <span aria-hidden="true">↗</span>
-              </a>
+              <div className="email-contact">
+                <a className="contact-link" href={`mailto:${profile.email}`}>
+                  Email me <span aria-hidden="true">↗</span>
+                </a>
+                <a className="contact-email" href={`mailto:${profile.email}`}>{profile.email}</a>
+              </div>
             )}
             {profile.phone && (
               <a className="contact-link" href={`tel:${profile.phone}`}>
@@ -124,6 +133,11 @@ export default function Home() {
                 WhatsApp <span aria-hidden="true">↗</span>
               </a>
             )}
+            {profile.socials.map((social) => (
+              <a className="contact-link" key={social.label} href={social.href} target="_blank" rel="noreferrer">
+                {social.label} <span aria-hidden="true">↗</span>
+              </a>
+            ))}
           </div>
           {(profile.location || profile.mapUrl) && (
             <div className="location-details">
@@ -135,11 +149,6 @@ export default function Home() {
               )}
             </div>
           )}
-          <div className="socials">
-            {profile.socials.map((social) => (
-              <a key={social.label} href={social.href} target="_blank" rel="noreferrer">{social.label} <span aria-hidden="true">↗</span></a>
-            ))}
-          </div>
         </section>
       </main>
 

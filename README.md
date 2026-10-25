@@ -9,6 +9,7 @@ A personal portfolio built with Next.js and TypeScript.
 3. Open [http://localhost:3000](http://localhost:3000).
 4. Update portfolio content in `lib/data.ts`.
 5. To add a downloadable CV, place the file at `public/cv.pdf` and set the `cv` value in `lib/data.ts`.
+6. To show a profile photo, place `photo.jpg` in `public/`. The portfolio displays the BM initials if the photo is missing.
 
 ## Build
 
