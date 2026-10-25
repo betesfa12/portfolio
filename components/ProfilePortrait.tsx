@@ -13,7 +13,7 @@ export default function ProfilePortrait() {
       ) : (
         <Image
           src="/photo.jpg"
-          alt=""
+          alt="Portrait of Betesfa Mengesh"
           fill
           sizes="(max-width: 560px) 54vw, (max-width: 800px) 290px, 31vw"
           className="profile-photo"

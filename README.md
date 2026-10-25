@@ -1,16 +1,16 @@
-# Portfolio
+# Betesfa Mengesh — Portfolio
 
-A personal portfolio built with Next.js and TypeScript.
+A personal portfolio website built with Next.js, React, TypeScript, and CSS.
 
-## Getting started
+## Run locally
 
-1. Install dependencies with `npm install`.
-2. Start the development server with `npm run dev`.
-3. Open [http://localhost:3000](http://localhost:3000).
-4. Update portfolio content in `lib/data.ts`.
-5. To add a downloadable CV, place the file at `public/cv.pdf` and set the `cv` value in `lib/data.ts`.
-6. To show a profile photo, place `photo.jpg` in `public/`. The portfolio displays the BM initials if the photo is missing.
+```bash
+npm install
+npm run dev
+```
 
-## Build
+Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-Run `npm run build` to create a production build. Deploy the project to a Next.js hosting provider such as Vercel.
+## Edit the content
+
+Update profile details, projects, skills, and education in `lib/data.ts`.
