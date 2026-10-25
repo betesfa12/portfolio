@@ -16,7 +16,7 @@ export const profile = {
   title: "Software Developer",
   tagline: "I build fast, clean and simple digital products for real people.",
   about:
-    "Final-year student at Injibara University. I take ideas from understanding the problem all the way to a working product, with a focus on simplicity, speed and accessibility.",
+    "4th-year student at Injibara University. I take ideas from understanding the problem all the way to a working product, with a focus on simplicity, speed and accessibility.",
   email: "mengeshabetesfa2@gmail.com",
   cv: undefined,
   phone: "",
@@ -53,6 +53,6 @@ export const experience = [
   {
     period: "Current",
     place: "Injibara University",
-    what: "BSc student (final year)",
+    what: "BSc student (4th year)",
   },
 ];

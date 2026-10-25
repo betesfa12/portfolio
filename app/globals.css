@@ -150,7 +150,6 @@ h1, h2, h3 { font-family: var(--font-display), var(--font-body), sans-serif; lin
 .section-intro { justify-self: end; color: var(--muted); font-size: .92rem; }
 .projects { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
 .project-card {
-  min-height: 260px;
   display: flex;
   flex-direction: column;
   padding: clamp(24px, 4vw, 38px);
@@ -164,14 +163,14 @@ h1, h2, h3 { font-family: var(--font-display), var(--font-body), sans-serif; lin
 .project-topline { display: flex; align-items: center; gap: 15px; color: var(--muted); font-size: .76rem; }
 .project-number { color: #7da64e; font-weight: 700; }
 .project-role { margin-left: auto; }
-.project-card h3 { margin-top: 42px; font-size: clamp(1.8rem, 4vw, 2.75rem); letter-spacing: -.05em; }
+.project-card h3 { margin-top: 28px; font-size: clamp(1.8rem, 4vw, 2.75rem); letter-spacing: -.05em; }
 .project-description { max-width: 520px; margin-top: 14px; color: var(--muted); font-size: .94rem; }
 .project-features { display: grid; gap: 8px; padding: 0; margin: 20px 0 0; color: var(--muted); font-size: .88rem; list-style: none; }
 .project-features li { position: relative; padding-left: 18px; }
 .project-features li::before { content: ""; position: absolute; top: .68em; left: 0; width: 6px; height: 6px; border-radius: 50%; background: #7da64e; }
 .tool-list { display: flex; flex-wrap: wrap; gap: 8px; padding: 0; margin: 20px 0 0; list-style: none; }
 .tool-list li { padding: 5px 10px; border: 1px solid var(--line); border-radius: 999px; color: var(--muted); font-size: .72rem; }
-.project-links { display: flex; flex-wrap: wrap; gap: 20px; margin-top: auto; padding-top: 28px; }
+.project-links { display: flex; flex-wrap: wrap; gap: 20px; margin-top: 22px; }
 .project-links a { min-height: 44px; display: inline-flex; align-items: center; text-decoration: none; font-size: .82rem; font-weight: 700; transition: color .2s; }
 .project-links a span { color: #7da64e; }
 
