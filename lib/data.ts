@@ -18,7 +18,10 @@ export const profile = {
     "Final-year student at Injibara University. I take ideas from understanding the problem all the way to a working product, with a focus on simplicity, speed and accessibility.",
   email: "mengeshabetesfa2@gmail.com",
   cv: undefined,
+  phone: "",
+  whatsapp: "",
   location: "Injibara, Ethiopia",
+  mapUrl: "https://www.google.com/maps/search/?api=1&query=Injibara%2C%20Ethiopia",
   socials: [{ label: "GitHub", href: "https://github.com/betesfa12" }],
 };
 
