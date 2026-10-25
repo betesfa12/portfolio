@@ -34,6 +34,14 @@ export const projects: Project[] = [
     year: "2026",
     title: "Agri Market",
     role: "Full-stack Developer",
+    overview:
+      "Agri Market is an Amharic-first marketplace that connects Ethiopian farmers with buyers. Buyers can discover and order produce, while farmers manage their product listings and incoming orders.",
+    features: [
+      "Browse produce by category and location",
+      "Buyer cart and order placement",
+      "Farmer tools for managing products and incoming orders",
+      "Buyer and farmer accounts with Amharic and English localization",
+    ],
     tools: ["React", "Vite", "TypeScript", "NestJS", "PostgreSQL", "Prisma", "Passport/JWT", "CSS"],
     repo: "https://github.com/betesfa12/agri-market",
   },
