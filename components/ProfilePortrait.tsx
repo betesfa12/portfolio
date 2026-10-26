@@ -9,7 +9,7 @@ export default function ProfilePortrait({ photoAvailable }: { photoAvailable: bo
   return (
     <div className="profile-portrait">
       {imageUnavailable ? (
-        <span className="profile-initials" role="img" aria-label="Betesfa Mengesh initials">BM</span>
+        <span className="profile-initials" aria-hidden="true">BM</span>
       ) : (
         <Image
           src="/photo.jpg"

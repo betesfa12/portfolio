@@ -49,14 +49,12 @@ export default function Home() {
               {profile.cv && <a className="btn" href={profile.cv} target="_blank" rel="noreferrer">View CV <span aria-hidden="true">↗</span></a>}
             </div>
           </div>
-          {photoAvailable && (
-            <div className="hero-art">
-              <div className="art-orbit orbit-one" aria-hidden="true" />
-              <div className="art-orbit orbit-two" aria-hidden="true" />
-              <ProfilePortrait photoAvailable={photoAvailable} />
-              <span className="art-caption">Ideas into impact</span>
-            </div>
-          )}
+          <div className="hero-art">
+            <div className="art-orbit orbit-one" aria-hidden="true" />
+            <div className="art-orbit orbit-two" aria-hidden="true" />
+            <ProfilePortrait photoAvailable={photoAvailable} />
+            <span className="art-caption">Ideas into impact</span>
+          </div>
           <a href={projects.length > 0 ? "#work" : "#about"} className="scroll-cue"><span aria-hidden="true" />Scroll to explore</a>
         </section>
 
