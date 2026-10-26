@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import CommandPalette from "@/components/CommandPalette";
 import ThemeToggle from "@/components/ThemeToggle";
 import { certifications, experience, profile, projects } from "@/lib/data";
 
@@ -16,6 +17,7 @@ export default function SiteHeader() {
   const [activeSection, setActiveSection] = useState("");
   const [menuOpen, setMenuOpen] = useState(false);
   const progressRef = useRef<HTMLSpanElement>(null);
+  const themeToggleRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
     let frame = 0;
@@ -119,7 +121,12 @@ export default function SiteHeader() {
             {label}
           </a>
         ))}
-        <ThemeToggle />
+        <CommandPalette
+          hasProjects={projects.length > 0}
+          email={profile.email}
+          onToggleTheme={() => themeToggleRef.current?.click()}
+        />
+        <ThemeToggle ref={themeToggleRef} />
       </nav>
       <span className="scroll-progress" aria-hidden="true">
         <span ref={progressRef} />

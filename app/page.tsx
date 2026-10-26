@@ -84,38 +84,38 @@ export default function Home() {
             <p className="section-index">{String(aboutIndex).padStart(2, "0")} / A little about me</p>
             <h2>About<span className="name-period">.</span></h2>
           </div>
-          <div className="about-content">
-            <p className="about-copy">{profile.about}</p>
-            <div className="about-details">
-              {Object.values(skills).some((items) => items.length > 0) && (
-                <div className="detail-block">
-                  <h3>Skills</h3>
-                  <div className="skill-groups">
-                    {Object.entries(skills).filter(([, items]) => items.length > 0).map(([category, items]) => (
-                      <section className="skill-group" key={category} aria-label={`${category} skills`}>
-                        <h4>{category}</h4>
-                        <ul className="skill-list">
-                          {items.map((skill) => <li key={skill}>{skill}</li>)}
-                        </ul>
-                      </section>
-                    ))}
-                  </div>
+          <div className="about-bento">
+            <article className="about-card about-card-intro">
+              <p className="about-copy">{profile.about}</p>
+            </article>
+            {Object.values(skills).some((items) => items.length > 0) && (
+              <article className="about-card about-card-skills">
+                <h3>Skills</h3>
+                <div className="skill-groups">
+                  {Object.entries(skills).filter(([, items]) => items.length > 0).map(([category, items]) => (
+                    <section className="skill-group" key={category} aria-label={`${category} skills`}>
+                      <h4>{category}</h4>
+                      <ul className="skill-list">
+                        {items.map((skill) => <li key={skill}>{skill}</li>)}
+                      </ul>
+                    </section>
+                  ))}
                 </div>
-              )}
-              {education.length > 0 && (
-                <div className="detail-block education-block">
-                  <h3>Education</h3>
-                  <ol className="education-timeline">
-                    {education.map((item) => (
-                      <li key={`${item.institution}-${item.qualification}`}>
-                        <strong>{item.qualification}</strong>
-                        <span>{item.institution}</span>
-                      </li>
-                    ))}
-                  </ol>
-                </div>
-              )}
-            </div>
+              </article>
+            )}
+            {education.length > 0 && (
+              <article className="about-card about-card-education">
+                <h3>Education</h3>
+                <ol className="education-timeline">
+                  {education.map((item) => (
+                    <li key={`${item.institution}-${item.qualification}`}>
+                      <strong>{item.qualification}</strong>
+                      <span>{item.institution}</span>
+                    </li>
+                  ))}
+                </ol>
+              </article>
+            )}
           </div>
         </section>
 

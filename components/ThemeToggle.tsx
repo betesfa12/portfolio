@@ -1,7 +1,7 @@
 "use client";
-import { useEffect, useState } from "react";
+import { forwardRef, useEffect, useState } from "react";
 
-export default function ThemeToggle() {
+const ThemeToggle = forwardRef<HTMLButtonElement>(function ThemeToggle(_, ref) {
   const [theme, setTheme] = useState<"light" | "dark">("light");
 
   useEffect(() => {
@@ -17,6 +17,7 @@ export default function ThemeToggle() {
 
   return (
     <button
+      ref={ref}
       className="toggle"
       onClick={toggle}
       aria-label={`Switch to ${theme === "dark" ? "light" : "dark"} mode`}
@@ -25,4 +26,6 @@ export default function ThemeToggle() {
       {theme === "dark" ? "Light mode" : "Dark mode"}
     </button>
   );
-}
+});
+
+export default ThemeToggle;
