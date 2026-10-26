@@ -6,7 +6,7 @@ import "./globals.css";
 const display = Bricolage_Grotesque({ subsets: ["latin"], variable: "--font-display", display: "swap" });
 
 const pageTitle = `${profile.name} — ${profile.title}`;
-const pageDescription = `${profile.title} in ${profile.location}. ${profile.tagline}`;
+const pageDescription = `${profile.about} ${profile.tagline}`;
 
 export const metadata: Metadata = {
   metadataBase: SITE_URL ? new URL(SITE_URL) : undefined,

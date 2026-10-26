@@ -2,11 +2,13 @@
 
 import { useEffect, useState } from "react";
 import ThemeToggle from "@/components/ThemeToggle";
-import { profile } from "@/lib/data";
+import { certifications, experience, profile, projects } from "@/lib/data";
 
 const sections = [
-  { id: "work", label: "Projects" },
+  ...(projects.length > 0 ? [{ id: "work", label: "Projects" }] : []),
   { id: "about", label: "About" },
+  ...(experience.length > 0 ? [{ id: "experience", label: "Experience" }] : []),
+  ...(certifications.length > 0 ? [{ id: "certifications", label: "Certifications" }] : []),
   { id: "contact", label: "Contact" },
 ];
 

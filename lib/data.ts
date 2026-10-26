@@ -14,14 +14,35 @@ export type Project = {
   repo?: string;
 };
 
+export type Education = {
+  institution: string;
+  qualification: string;
+};
+
+export type Experience = {
+  period: string;
+  place: string;
+  what: string;
+};
+
+export type Certification = {
+  name: string;
+  issuer: string;
+  year?: string;
+  url?: string;
+};
+
 export const profile = {
   name: "Betesfa Mengesh",
-  title: "Software Developer",
+  title: "Software Engineering Student",
   tagline: "I build fast, clean and simple digital products for real people.",
   about:
-    "4th-year student at Injibara University. I take ideas from understanding the problem all the way to a working product, with a focus on simplicity, speed and accessibility.",
+    "4th-year Software Engineering student at Injibara University. I take ideas from understanding the problem all the way to a working product, with a focus on simplicity, speed and accessibility.",
   email: "mengeshabetesfa2@gmail.com",
   cv: undefined,
+  // Optional: one availability sentence and a LinkedIn profile URL; keep empty until provided.
+  availability: "",
+  linkedin: "",
   phone: "",
   whatsapp: "",
   location: "Injibara, Ethiopia",
@@ -29,6 +50,7 @@ export const profile = {
   socials: [{ label: "GitHub", href: "https://github.com/betesfa12" }],
 };
 
+// Add projects as Project entries; screenshots can be discovered from public/projects/*.png.
 export const projects: Project[] = [
   {
     year: "2026",
@@ -43,7 +65,6 @@ export const projects: Project[] = [
       "Buyer and farmer accounts with Amharic and English localization",
     ],
     tools: ["React", "Vite", "TypeScript", "NestJS", "PostgreSQL", "Prisma", "Passport/JWT", "CSS"],
-    repo: "https://github.com/betesfa12/agri-market",
   },
 ];
 
@@ -54,13 +75,15 @@ export const skills = {
   Tools: ["Vite", "Git"],
 };
 
-export const experience = [
-  {
-    period: "Current",
-    place: "Injibara University",
-    what: "BSc student (4th year)",
-  },
+export const education: Education[] = [
+  { institution: "Injibara University", qualification: "BSc in Software Engineering (4th year)" },
 ];
+
+// Add verified internships, clubs, volunteering, or hackathons as Experience entries.
+export const experience: Experience[] = [];
+
+// Add verified credentials as Certification entries.
+export const certifications: Certification[] = [];
 
 const configuredSiteUrl = process.env.NEXT_PUBLIC_SITE_URL?.trim();
 export const SITE_URL =
