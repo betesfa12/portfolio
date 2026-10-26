@@ -26,6 +26,9 @@ const aboutIndex = projects.length > 0 ? 2 : 1;
 const experienceIndex = aboutIndex + 1;
 const certificationsIndex = experienceIndex + (experience.length > 0 ? 1 : 0);
 const contactIndex = certificationsIndex + (certifications.length > 0 ? 1 : 0);
+const contactPhone = profile.phone.trim();
+const whatsappNumber = profile.whatsapp.trim() || contactPhone.replace(/\D/g, "");
+const telegramUsername = profile.telegram.trim().replace(/^@/, "");
 
 export default function Home() {
   const nameParts = profile.name.split(" ");
@@ -170,10 +173,25 @@ export default function Home() {
                 <CopyEmailButton email={profile.email} />
               </div>
             )}
-            {profile.phone && <a className="contact-link" href={`tel:${profile.phone}`}>Call me <span aria-hidden="true">↗</span></a>}
-            {profile.whatsapp && (
-              <a className="contact-link whatsapp-link" href={`https://wa.me/${profile.whatsapp}?text=Hello%20Betesfa`} target="_blank" rel="noreferrer">
+            {contactPhone && (
+              <>
+                <a className="contact-link" href={`tel:${contactPhone}`} aria-label={`Call Betesfa Mengesh at ${contactPhone}`}>
+                  Call <span aria-hidden="true">↗</span>
+                </a>
+                <a className="contact-link" href={`sms:${contactPhone}`} aria-label={`Send an SMS to Betesfa Mengesh at ${contactPhone}`}>
+                  SMS <span aria-hidden="true">↗</span>
+                </a>
+                <span className="contact-phone">{contactPhone}</span>
+              </>
+            )}
+            {whatsappNumber && (
+              <a className="contact-link whatsapp-link" href={`https://wa.me/${whatsappNumber}`} target="_blank" rel="noopener noreferrer" aria-label="Message Betesfa Mengesh on WhatsApp">
                 WhatsApp <span aria-hidden="true">↗</span>
+              </a>
+            )}
+            {telegramUsername && (
+              <a className="contact-link" href={`https://t.me/${telegramUsername}`} target="_blank" rel="noopener noreferrer" aria-label="Message Betesfa Mengesh on Telegram">
+                Telegram <span aria-hidden="true">↗</span>
               </a>
             )}
             {profile.socials.map((social) => (

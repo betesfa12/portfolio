@@ -281,6 +281,7 @@ h1, h2, h3 { font-family: var(--font-display), var(--font-body), sans-serif; lin
 .contact-link { min-height: 48px; display: inline-flex; align-items: center; justify-content: center; gap: 12px; padding: 0 18px; border: 1px solid rgb(25 37 31 / 25%); border-radius: 999px; background: transparent; color: inherit; font: inherit; font-size: .9rem; font-weight: 700; text-decoration: none; transition: background-color .2s, transform .2s; cursor: pointer; }
 .contact-link:hover { transform: translateY(-2px); background: rgb(255 255 255 / 35%); }
 .contact-link span { color: #53634e; }
+.contact-phone { min-height: 44px; display: inline-flex; align-items: center; padding-inline: 4px; color: inherit; font-size: .88rem; font-weight: 600; overflow-wrap: anywhere; }
 .contact-email { min-height: 44px; display: inline-flex; align-items: center; color: #344636; font-size: .88rem; font-weight: 600; overflow-wrap: anywhere; text-decoration-thickness: 1px; text-underline-offset: 4px; }
 .whatsapp-link { border-color: #718d59; background: #f5f4ef; }
 .location-details { position: relative; z-index: 1; display: flex; flex-wrap: wrap; align-items: center; gap: 8px 18px; margin-top: 18px; color: #53634e; font-size: .85rem; }

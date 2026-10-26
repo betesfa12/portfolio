@@ -124,6 +124,8 @@ export default function SiteHeader() {
         <CommandPalette
           hasProjects={projects.length > 0}
           email={profile.email}
+          phone={profile.phone.trim()}
+          whatsapp={profile.whatsapp.trim() || profile.phone.replace(/\D/g, "")}
           onToggleTheme={() => themeToggleRef.current?.click()}
         />
         <ThemeToggle ref={themeToggleRef} />

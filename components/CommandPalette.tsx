@@ -5,10 +5,12 @@ import { type KeyboardEvent as ReactKeyboardEvent, useEffect, useRef, useState }
 type CommandPaletteProps = {
   hasProjects: boolean;
   email: string;
+  phone: string;
+  whatsapp: string;
   onToggleTheme: () => void;
 };
 
-export default function CommandPalette({ hasProjects, email, onToggleTheme }: CommandPaletteProps) {
+export default function CommandPalette({ hasProjects, email, phone, whatsapp, onToggleTheme }: CommandPaletteProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [feedback, setFeedback] = useState("");
   const [shortcutLabel, setShortcutLabel] = useState("Ctrl K");
@@ -81,6 +83,8 @@ export default function CommandPalette({ hasProjects, email, onToggleTheme }: Co
     { label: "About", action: () => navigateTo("about") },
     { label: "Contact", action: () => navigateTo("contact") },
     { label: "Toggle dark mode", action: () => { onToggleTheme(); closePalette(); } },
+    ...(phone ? [{ label: "Call", action: () => { closePalette(); window.location.href = `tel:${phone}`; } }] : []),
+    ...(whatsapp ? [{ label: "WhatsApp", action: () => { window.open(`https://wa.me/${whatsapp}`, "_blank", "noopener,noreferrer"); closePalette(); } }] : []),
     ...(email ? [{ label: "Copy email", action: copyEmail }] : []),
   ];
 

@@ -43,8 +43,12 @@ export const profile = {
   // Optional: one availability sentence and a LinkedIn profile URL; keep empty until provided.
   availability: "",
   linkedin: "",
+  // Public phone number in international format, e.g. "+251912345678".
   phone: "",
+  // WhatsApp number as digits only, e.g. "251912345678"; falls back to phone digits.
   whatsapp: "",
+  // Telegram username without @.
+  telegram: "",
   location: "Injibara, Ethiopia",
   mapUrl: "https://www.google.com/maps/search/?api=1&query=Injibara%2C%20Ethiopia",
   socials: [{ label: "GitHub", href: "https://github.com/betesfa12" }],
