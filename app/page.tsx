@@ -28,6 +28,10 @@ const certificationsIndex = experienceIndex + (experience.length > 0 ? 1 : 0);
 const contactIndex = certificationsIndex + (certifications.length > 0 ? 1 : 0);
 
 export default function Home() {
+  const nameParts = profile.name.split(" ");
+  const firstName = nameParts[0];
+  const lastName = nameParts.slice(1).join(" ");
+
   return (
     <>
       <a className="skip-link" href="#main-content">Skip to content</a>
@@ -38,7 +42,10 @@ export default function Home() {
         <section id="top" className="hero" data-reveal>
           <div className="hero-copy">
             <p className="eyebrow"><span className="eyebrow-dot" />{profile.title}</p>
-            <h1>{profile.name}<span className="name-period">.</span></h1>
+            <h1 className="hero-name">
+              <span className="hero-name-line"><span>{firstName}{!lastName && <span className="name-period">.</span>}</span></span>
+              {lastName && <span className="hero-name-line"><span>{lastName}<span className="name-period">.</span></span></span>}
+            </h1>
             <p className="tagline">{profile.tagline}</p>
             {profile.location && <p className="location">{profile.location}</p>}
             <div className="actions">

@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import ThemeToggle from "@/components/ThemeToggle";
 import { certifications, experience, profile, projects } from "@/lib/data";
 
@@ -15,6 +15,7 @@ const sections = [
 export default function SiteHeader() {
   const [activeSection, setActiveSection] = useState("");
   const [menuOpen, setMenuOpen] = useState(false);
+  const progressRef = useRef<HTMLSpanElement>(null);
 
   useEffect(() => {
     let frame = 0;
@@ -50,6 +51,29 @@ export default function SiteHeader() {
       cancelAnimationFrame(frame);
       window.removeEventListener("scroll", updateActiveSection);
       window.removeEventListener("resize", updateActiveSection);
+    };
+  }, []);
+
+  useEffect(() => {
+    let frame = 0;
+
+    function updateProgress() {
+      cancelAnimationFrame(frame);
+      frame = requestAnimationFrame(() => {
+        const scrollableHeight = document.documentElement.scrollHeight - window.innerHeight;
+        const progress = scrollableHeight > 0 ? window.scrollY / scrollableHeight : 0;
+        progressRef.current?.style.setProperty("transform", `scaleX(${Math.min(1, Math.max(0, progress))})`);
+      });
+    }
+
+    updateProgress();
+    window.addEventListener("scroll", updateProgress, { passive: true });
+    window.addEventListener("resize", updateProgress);
+
+    return () => {
+      cancelAnimationFrame(frame);
+      window.removeEventListener("scroll", updateProgress);
+      window.removeEventListener("resize", updateProgress);
     };
   }, []);
 
@@ -97,6 +121,9 @@ export default function SiteHeader() {
         ))}
         <ThemeToggle />
       </nav>
+      <span className="scroll-progress" aria-hidden="true">
+        <span ref={progressRef} />
+      </span>
     </header>
   );
 }
