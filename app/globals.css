@@ -131,11 +131,11 @@ h1, h2, h3 { font-family: var(--font-display), var(--font-body), sans-serif; lin
 .btn.primary { border-color: var(--accent); background: var(--accent); color: var(--accent-ink); }
 .text-link { min-height: 44px; display: inline-flex; align-items: center; gap: 4px; text-decoration: none; font-size: .9rem; font-weight: 700; transition: color .2s; }
 .text-link span, .btn span { font-size: 1.1em; }
-.hero-art { min-height: 390px; position: relative; display: grid; place-items: center; overflow: clip; }
-.art-orbit { position: absolute; width: min(37vw, 430px); aspect-ratio: 1; border: 1px solid var(--line); border-radius: 50%; }
-.orbit-two { width: min(44vw, 510px); }
+.hero-art { min-height: 273px; position: relative; display: grid; place-items: center; }
+.art-orbit { position: absolute; width: min(26vw, 301px); aspect-ratio: 1; border: 1px solid var(--line); border-radius: 50%; }
+.orbit-two { width: min(31vw, 357px); }
 .profile-portrait {
-  width: min(31vw, 350px);
+  width: min(21.7vw, 245px);
   aspect-ratio: 1;
   position: relative;
   z-index: 1;
@@ -147,9 +147,8 @@ h1, h2, h3 { font-family: var(--font-display), var(--font-body), sans-serif; lin
   background: radial-gradient(circle at 35% 32%, #dcf6b9 0, #b5ed70 32%, #91c94e 72%, #6c9a39 100%);
   box-shadow: 0 28px 80px rgb(88 119 56 / 20%);
 }
-.profile-initials { color: #25351d; font: 800 clamp(5rem, 10vw, 8rem)/1 var(--font-display), sans-serif; letter-spacing: -.1em; transform: translateX(-.06em); }
+.profile-initials { color: #25351d; font: 800 clamp(3.5rem, 7vw, 5.6rem)/1 var(--font-display), sans-serif; letter-spacing: -.1em; transform: translateX(-.06em); }
 .profile-photo { object-fit: cover; }
-.art-caption { position: absolute; z-index: 2; right: 0; bottom: 10%; padding: 11px 15px; border: 1px solid var(--line); border-radius: 999px; background: var(--surface); color: var(--muted); font-size: .72rem; }
 .scroll-cue { min-height: 44px; position: absolute; bottom: 32px; left: 0; display: flex; align-items: center; gap: 12px; color: var(--muted); text-decoration: none; font-size: .75rem; }
 .scroll-cue span { width: 28px; height: 1px; background: var(--muted); }
 
@@ -209,8 +208,8 @@ h1, h2, h3 { font-family: var(--font-display), var(--font-body), sans-serif; lin
 .education-period { color: var(--ink); }
 .education-timeline strong { color: var(--ink); font-weight: 700; }
 .availability { max-width: 620px; margin-top: 20px; color: #344636; font-size: 1.05rem; font-weight: 600; }
-.section.work-section { padding-bottom: 68px; }
-.section.about-section { padding-top: 68px; }
+.section.work-section { padding-bottom: 48px; }
+.section.about-section { padding-top: 48px; padding-bottom: 68px; }
 
 .contact-section {
   position: relative;
@@ -285,10 +284,10 @@ h1, h2, h3 { font-family: var(--font-display), var(--font-body), sans-serif; lin
   .primary-navigation.is-open { order: 3; width: 100%; display: flex; flex-wrap: wrap; justify-content: flex-start; padding: 8px 0 14px; border-top: 1px solid var(--line); }
   .primary-navigation > a { font-size: .84rem; }
   .hero { min-height: 0; grid-template-columns: 1fr; gap: 15px; padding-block: 90px 105px; }
-  .hero-art { min-height: 330px; }
-  .profile-portrait { width: min(54vw, 290px); }
-  .art-orbit { width: min(65vw, 350px); }
-  .orbit-two { width: min(76vw, 420px); }
+  .hero-art { min-height: 231px; }
+  .profile-portrait { width: min(37.8vw, 203px); }
+  .art-orbit { width: min(45.5vw, 245px); }
+  .orbit-two { width: min(53.2vw, 294px); }
   .scroll-cue { bottom: 28px; }
   .about-section { grid-template-columns: 1fr; gap: 38px; }
   .about-section .section-heading h2 { margin-top: 16px; }
@@ -302,10 +301,10 @@ h1, h2, h3 { font-family: var(--font-display), var(--font-body), sans-serif; lin
   .toggle { padding: 6px 9px; font-size: .72rem; }
   .hero { padding-top: 70px; }
   .hero h1 { font-size: clamp(3.5rem, 16vw, 5rem); }
-  .hero-art { min-height: 270px; }
+  .hero-art { min-height: 189px; }
   .section { padding-block: 78px; }
-  .section.work-section { padding-bottom: 58px; }
-  .section.about-section { padding-top: 58px; }
+  .section.work-section { padding-bottom: 40px; }
+  .section.about-section { padding-top: 40px; padding-bottom: 52px; }
   .section-heading { grid-template-columns: 1fr; }
   .section-intro { justify-self: start; }
   .projects { grid-template-columns: 1fr; }

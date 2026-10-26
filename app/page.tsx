@@ -53,7 +53,6 @@ export default function Home() {
             <div className="art-orbit orbit-one" aria-hidden="true" />
             <div className="art-orbit orbit-two" aria-hidden="true" />
             <ProfilePortrait photoAvailable={photoAvailable} />
-            <span className="art-caption">Ideas into impact</span>
           </div>
           <a href={projects.length > 0 ? "#work" : "#about"} className="scroll-cue"><span aria-hidden="true" />Scroll to explore</a>
         </section>
@@ -151,7 +150,7 @@ export default function Home() {
         )}
 
         <section id="contact" className="contact-section" data-reveal>
-          <p className="section-index">{String(contactIndex).padStart(2, "0")} / Have a project in mind?</p>
+          <p className="section-index">{String(contactIndex).padStart(2, "0")} / Get in touch</p>
           <h2>Let&apos;s work<br />together<span className="name-period">.</span></h2>
           {profile.availability.trim() && <p className="availability">{profile.availability}</p>}
           <div className="contact-options">
