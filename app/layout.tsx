@@ -9,7 +9,7 @@ const pageTitle = `${profile.name} — ${profile.title}`;
 const pageDescription = `${profile.about} ${profile.tagline}`;
 
 export const metadata: Metadata = {
-  metadataBase: SITE_URL ? new URL(SITE_URL) : undefined,
+  metadataBase: new URL(SITE_URL || "http://localhost:3000"),
   title: pageTitle,
   description: pageDescription,
   ...(SITE_URL ? { alternates: { canonical: "/" } } : {}),
