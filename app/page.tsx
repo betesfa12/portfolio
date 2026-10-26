@@ -1,6 +1,7 @@
 import { existsSync } from "node:fs";
 import path from "node:path";
 import CopyEmailButton from "@/components/CopyEmailButton";
+import CopyPhoneButton from "@/components/CopyPhoneButton";
 import ProfilePortrait from "@/components/ProfilePortrait";
 import ProjectCard from "@/components/ProjectCard";
 import RevealObserver from "@/components/RevealObserver";
@@ -27,6 +28,8 @@ const experienceIndex = aboutIndex + 1;
 const certificationsIndex = experienceIndex + (experience.length > 0 ? 1 : 0);
 const contactIndex = certificationsIndex + (certifications.length > 0 ? 1 : 0);
 const contactPhone = profile.phone.trim();
+const localPhone = contactPhone.replace(/^\+251/, "0");
+const formattedPhone = localPhone.replace(/^(\d{4})(\d{3})(\d{3})$/, "$1 $2 $3");
 const whatsappNumber = profile.whatsapp.trim() || contactPhone.replace(/\D/g, "");
 const telegramUsername = profile.telegram.trim().replace(/^@/, "");
 
@@ -181,7 +184,10 @@ export default function Home() {
                 <a className="contact-link" href={`sms:${contactPhone}`} aria-label={`Send an SMS to Betesfa Mengesh at ${contactPhone}`}>
                   SMS <span aria-hidden="true">↗</span>
                 </a>
-                <span className="contact-phone">{contactPhone}</span>
+                <div className="phone-contact">
+                  <span className="contact-phone">{formattedPhone}</span>
+                  <CopyPhoneButton phone={localPhone} />
+                </div>
               </>
             )}
             {whatsappNumber && (

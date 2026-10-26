@@ -277,7 +277,7 @@ h1, h2, h3 { font-family: var(--font-display), var(--font-body), sans-serif; lin
 .contact-section h2 { position: relative; z-index: 1; margin-top: 28px; }
 .contact-section > * { position: relative; z-index: 1; }
 .contact-options { position: relative; z-index: 1; display: flex; flex-wrap: wrap; gap: 12px; margin-top: 28px; }
-.email-contact { display: inline-flex; flex-wrap: wrap; align-items: center; gap: 8px 14px; }
+.email-contact, .phone-contact { display: inline-flex; flex-wrap: wrap; align-items: center; gap: 8px 14px; }
 .contact-link { min-height: 48px; display: inline-flex; align-items: center; justify-content: center; gap: 12px; padding: 0 18px; border: 1px solid rgb(25 37 31 / 25%); border-radius: 999px; background: transparent; color: inherit; font: inherit; font-size: .9rem; font-weight: 700; text-decoration: none; transition: background-color .2s, transform .2s; cursor: pointer; }
 .contact-link:hover { transform: translateY(-2px); background: rgb(255 255 255 / 35%); }
 .contact-link span { color: #53634e; }
@@ -396,7 +396,7 @@ h1, h2, h3 { font-family: var(--font-display), var(--font-body), sans-serif; lin
   .contact-section { padding: 34px 24px; }
   .contact-section h2 { font-size: clamp(2.8rem, 13vw, 4rem); }
   .contact-link { word-break: break-word; }
-  .email-contact { align-items: flex-start; }
+  .email-contact, .phone-contact { align-items: flex-start; }
   .contact-email { max-width: 100%; }
 }
 [data-reveal] { transition: opacity .55s ease, transform .55s ease; }

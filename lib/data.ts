@@ -44,9 +44,9 @@ export const profile = {
   availability: "",
   linkedin: "",
   // Public phone number in international format, e.g. "+251912345678".
-  phone: "",
+  phone: "+251929767575",
   // WhatsApp number as digits only, e.g. "251912345678"; falls back to phone digits.
-  whatsapp: "",
+  whatsapp: "251929767575",
   // Telegram username without @.
   telegram: "",
   location: "Injibara, Ethiopia",
