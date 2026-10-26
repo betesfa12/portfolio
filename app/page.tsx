@@ -167,49 +167,57 @@ export default function Home() {
           <h2>Let&apos;s work<br />together<span className="name-period">.</span></h2>
           {profile.availability.trim() && <p className="availability">{profile.availability}</p>}
           <div className="contact-options">
-            {profile.email && (
-              <div className="email-contact">
-                <a className="contact-link" href={`mailto:${profile.email}`}>
-                  Email me <span aria-hidden="true">↗</span>
-                </a>
-                <a className="contact-email" href={`mailto:${profile.email}`}>{profile.email}</a>
-                <CopyEmailButton email={profile.email} />
-              </div>
-            )}
-            {contactPhone && (
-              <>
-                <a className="contact-link" href={`tel:${contactPhone}`} aria-label={`Call Betesfa Mengesh at ${contactPhone}`}>
-                  Call <span aria-hidden="true">↗</span>
-                </a>
-                <a className="contact-link" href={`sms:${contactPhone}`} aria-label={`Send an SMS to Betesfa Mengesh at ${contactPhone}`}>
-                  SMS <span aria-hidden="true">↗</span>
-                </a>
-                <div className="phone-contact">
+            <div className="contact-details">
+              {profile.email && (
+                <div className="contact-row">
+                  <span className="contact-email">{profile.email}</span>
+                  <CopyEmailButton email={profile.email} />
+                </div>
+              )}
+              {contactPhone && (
+                <div className="contact-row">
                   <span className="contact-phone">{formattedPhone}</span>
                   <CopyPhoneButton phone={localPhone} />
                 </div>
-              </>
-            )}
-            {whatsappNumber && (
-              <a className="contact-link whatsapp-link" href={`https://wa.me/${whatsappNumber}`} target="_blank" rel="noopener noreferrer" aria-label="Message Betesfa Mengesh on WhatsApp">
-                WhatsApp <span aria-hidden="true">↗</span>
-              </a>
-            )}
-            {telegramUsername && (
-              <a className="contact-link" href={`https://t.me/${telegramUsername}`} target="_blank" rel="noopener noreferrer" aria-label="Message Betesfa Mengesh on Telegram">
-                Telegram <span aria-hidden="true">↗</span>
-              </a>
-            )}
-            {profile.socials.map((social) => (
-              <a className="contact-link" key={social.label} href={social.href} target="_blank" rel="noreferrer">
-                {social.label} <span aria-hidden="true">↗</span>
-              </a>
-            ))}
-            {profile.linkedin.trim() && (
-              <a className="contact-link" href={profile.linkedin} target="_blank" rel="noreferrer">
-                LinkedIn <span aria-hidden="true">↗</span>
-              </a>
-            )}
+              )}
+            </div>
+            <div className="contact-actions">
+              {profile.email && (
+                <a className="contact-link" href={`mailto:${profile.email}`}>
+                  Email me <span aria-hidden="true">↗</span>
+                </a>
+              )}
+              {contactPhone && (
+                <>
+                  <a className="contact-link" href={`tel:${contactPhone}`} aria-label={`Call Betesfa Mengesh at ${contactPhone}`}>
+                    Call <span aria-hidden="true">↗</span>
+                  </a>
+                  <a className="contact-link" href={`sms:${contactPhone}`} aria-label={`Send an SMS to Betesfa Mengesh at ${contactPhone}`}>
+                    SMS <span aria-hidden="true">↗</span>
+                  </a>
+                </>
+              )}
+              {whatsappNumber && (
+                <a className="contact-link" href={`https://wa.me/${whatsappNumber}`} target="_blank" rel="noopener noreferrer" aria-label="Message Betesfa Mengesh on WhatsApp">
+                  WhatsApp <span aria-hidden="true">↗</span>
+                </a>
+              )}
+              {telegramUsername && (
+                <a className="contact-link" href={`https://t.me/${telegramUsername}`} target="_blank" rel="noopener noreferrer" aria-label="Message Betesfa Mengesh on Telegram">
+                  Telegram <span aria-hidden="true">↗</span>
+                </a>
+              )}
+              {profile.socials.map((social) => (
+                <a className="contact-link" key={social.label} href={social.href} target="_blank" rel="noreferrer">
+                  {social.label} <span aria-hidden="true">↗</span>
+                </a>
+              ))}
+              {profile.linkedin.trim() && (
+                <a className="contact-link" href={profile.linkedin} target="_blank" rel="noreferrer">
+                  LinkedIn <span aria-hidden="true">↗</span>
+                </a>
+              )}
+            </div>
           </div>
           {(profile.location || profile.mapUrl) && (
             <div className="location-details">

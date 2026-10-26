@@ -90,6 +90,4 @@ export const experience: Experience[] = [];
 export const certifications: Certification[] = [];
 
 const configuredSiteUrl = process.env.NEXT_PUBLIC_SITE_URL?.trim();
-export const SITE_URL =
-  configuredSiteUrl?.replace(/\/+$/, "") ||
-  (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL.replace(/\/+$/, "")}` : "");
+export const SITE_URL = configuredSiteUrl?.replace(/\/+$/, "") || "";
