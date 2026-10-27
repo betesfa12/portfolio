@@ -1,38 +1,17 @@
-import { existsSync, readdirSync } from "node:fs";
+import { existsSync } from "node:fs";
 import path from "node:path";
-import Image from "next/image";
 import type { Project } from "@/lib/data";
+import ProjectGallery from "@/components/ProjectGallery";
 
-function availableScreenshots(project: Project, projectCount: number) {
-  const directory = path.join(process.cwd(), "public", "projects");
-  let discovered: string[] = [];
-
-  try {
-    discovered = readdirSync(directory)
-      .filter((file) => file.toLowerCase().endsWith(".png"))
-      .map((file) => `/projects/${file}`);
-  } catch {
-    return [];
-  }
-
-  const configured = project.screenshots?.length ? project.screenshots : discovered;
-  const existing = configured.filter((src) => {
+function availableScreenshots(project: Project) {
+  return (project.screenshots ?? []).filter(({ src }) => {
     if (!src.startsWith("/projects/") || src.includes("..")) return false;
     return existsSync(path.join(process.cwd(), "public", src.slice(1)));
   });
-
-  if (project.screenshots?.length || projectCount === 1) return existing;
-
-  const slug = project.title.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
-  const firstWord = slug.split("-")[0];
-  return existing.filter((src) => {
-    const filename = path.basename(src, ".png").toLowerCase();
-    return filename === slug || filename.startsWith(`${slug}-`) || filename === firstWord || filename.startsWith(`${firstWord}-`);
-  });
 }
 
-export default function ProjectCard({ project, index, projectCount }: { project: Project; index: number; projectCount: number }) {
-  const screenshots = availableScreenshots(project, projectCount);
+export default function ProjectCard({ project, index }: { project: Project; index: number; projectCount: number }) {
+  const screenshots = availableScreenshots(project);
   const overview = project.overview ?? project.problem;
   const links = [
     project.liveUrl && { label: "Visit project", href: project.liveUrl },
@@ -82,11 +61,7 @@ export default function ProjectCard({ project, index, projectCount }: { project:
       )}
 
       {screenshots.length > 0 && (
-        <div className="project-gallery" aria-label={`${project.title} screenshots`}>
-          {screenshots.map((src) => (
-            <Image key={src} src={src} alt={`${project.title} application screenshot`} width={960} height={600} />
-          ))}
-        </div>
+        <ProjectGallery projectTitle={project.title} screenshots={screenshots} />
       )}
 
       {links.length > 0 && (

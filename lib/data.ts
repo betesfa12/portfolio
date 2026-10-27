@@ -8,7 +8,7 @@ export type Project = {
   result?: string;
   features?: string[];
   tools?: string[];
-  screenshots?: string[];
+  screenshots?: { src: string; alt: string }[];
   liveUrl?: string;
   link?: string;
   repo?: string;
@@ -54,7 +54,7 @@ export const profile = {
   socials: [{ label: "GitHub", href: "https://github.com/betesfa12" }],
 };
 
-// Add projects as Project entries; screenshots can be discovered from public/projects/*.png.
+// Add projects as Project entries; attach screenshots explicitly to each project.
 export const projects: Project[] = [
   {
     year: "2026",
@@ -67,6 +67,11 @@ export const projects: Project[] = [
       "Buyer cart and order placement",
       "Farmer tools for managing products and incoming orders",
       "Buyer and farmer accounts with Amharic and English localization",
+    ],
+    screenshots: [
+      { src: "/projects/agri-1.png", alt: "Agri Market home page in Amharic" },
+      { src: "/projects/agri-3.png", alt: "Agri Market product listings with shopping cart" },
+      { src: "/projects/agri-5.png", alt: "Agri Market farmer add-product form" },
     ],
     tools: ["React", "Vite", "TypeScript", "NestJS", "PostgreSQL", "Prisma", "Passport/JWT", "CSS"],
   },
