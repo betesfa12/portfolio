@@ -145,6 +145,7 @@ export default function ProjectGallery({
                 width={1600}
                 height={900}
                 loading="eager"
+                unoptimized
               />
             </div>
             <div className="project-lightbox-controls">

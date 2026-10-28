@@ -29,7 +29,7 @@ export const metadata: Metadata = {
   },
 };
 
-const themeScript = `try{var t=localStorage.getItem("theme");if(!t){t=matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light"}document.documentElement.dataset.theme=t}catch(e){}`;
+const themeScript = `try{var d=document.documentElement;var t=localStorage.getItem("theme");if(!t){t=matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light"}d.dataset.theme=t;var s=Number(localStorage.getItem("text-size"));d.dataset.textSize=Number.isInteger(s)&&s%2===0&&s>=16&&s<=24?String(s):"18"}catch(e){document.documentElement.dataset.textSize="18"}`;
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (

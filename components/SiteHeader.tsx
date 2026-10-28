@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import CommandPalette from "@/components/CommandPalette";
 import ThemeToggle from "@/components/ThemeToggle";
+import TextSizeControl from "@/components/TextSizeControl";
 import { certifications, experience, profile, projects } from "@/lib/data";
 
 const sections = [
@@ -28,8 +29,13 @@ export default function SiteHeader() {
         const headerHeight = document.querySelector(".bar")?.getBoundingClientRect().height ?? 0;
         const activationLine = headerHeight + 48;
         const lastSection = sections[sections.length - 1];
+        const contactSection = document.getElementById("contact");
+        const contactBounds = contactSection?.getBoundingClientRect();
 
-        if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 2) {
+        if (
+          window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 2 ||
+          (contactBounds && contactBounds.top < window.innerHeight && contactBounds.bottom > headerHeight)
+        ) {
           setActiveSection(lastSection.id);
           return;
         }
@@ -64,6 +70,7 @@ export default function SiteHeader() {
       frame = requestAnimationFrame(() => {
         const scrollableHeight = document.documentElement.scrollHeight - window.innerHeight;
         const progress = scrollableHeight > 0 ? window.scrollY / scrollableHeight : 0;
+        document.querySelector(".bar")?.classList.toggle("is-scrolled", window.scrollY > 8);
         progressRef.current?.style.setProperty("transform", `scaleX(${Math.min(1, Math.max(0, progress))})`);
       });
     }
@@ -91,7 +98,7 @@ export default function SiteHeader() {
   }, [menuOpen]);
 
   return (
-    <header className="bar">
+    <header className="bar container">
       <a href="#top" className="brand" aria-label={`${profile.name} home`} onClick={() => setMenuOpen(false)}>
         <span className="brand-mark" aria-hidden="true">BM</span>
         <span>{profile.name}</span>
@@ -121,6 +128,11 @@ export default function SiteHeader() {
             {label}
           </a>
         ))}
+        {profile.cv?.trim() && (
+          <a className="nav-cv" href={profile.cv.trim()} download>
+            Download CV
+          </a>
+        )}
         <CommandPalette
           hasProjects={projects.length > 0}
           email={profile.email}
@@ -129,6 +141,7 @@ export default function SiteHeader() {
           onToggleTheme={() => themeToggleRef.current?.click()}
         />
         <ThemeToggle ref={themeToggleRef} />
+        <TextSizeControl />
       </nav>
       <span className="scroll-progress" aria-hidden="true">
         <span ref={progressRef} />

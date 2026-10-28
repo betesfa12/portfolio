@@ -30,13 +30,23 @@ const contactIndex = certificationsIndex + (certifications.length > 0 ? 1 : 0);
 const contactPhone = profile.phone.trim();
 const localPhone = contactPhone.replace(/^\+251/, "0");
 const formattedPhone = localPhone.replace(/^(\d{4})(\d{3})(\d{3})$/, "$1 $2 $3");
-const whatsappNumber = profile.whatsapp.trim() || contactPhone.replace(/\D/g, "");
+const phoneDigits = contactPhone.replace(/\D/g, "");
+const internationalPhone = contactPhone.startsWith("+")
+  ? `+${phoneDigits}`
+  : phoneDigits.startsWith("0")
+    ? `+251${phoneDigits.slice(1)}`
+    : `+${phoneDigits}`;
+const configuredWhatsapp = profile.whatsapp.trim().replace(/\D/g, "");
+const whatsappNumber = configuredWhatsapp.startsWith("0")
+  ? `251${configuredWhatsapp.slice(1)}`
+  : configuredWhatsapp || internationalPhone.replace(/\D/g, "");
 const telegramUsername = profile.telegram.trim().replace(/^@/, "");
 
 export default function Home() {
   const nameParts = profile.name.split(" ");
   const firstName = nameParts[0];
   const lastName = nameParts.slice(1).join(" ");
+  const marqueeSkills = [...new Set(Object.values(skills).flat())];
 
   return (
     <>
@@ -45,7 +55,7 @@ export default function Home() {
       <SiteHeader />
 
       <main id="main-content">
-        <section id="top" className="hero" data-reveal>
+        <section id="top" className="hero container" data-reveal>
           <div className="hero-copy">
             <p className="eyebrow"><span className="eyebrow-dot" />{profile.title}</p>
             <h1 className="hero-name">
@@ -59,43 +69,56 @@ export default function Home() {
                 {projects.length > 0 ? "View my work" : "About me"} <span aria-hidden="true">↘</span>
               </a>
               <a className="text-link" href={`mailto:${profile.email}`}>Get in touch <span aria-hidden="true">↗</span></a>
-              {profile.cv && <a className="btn" href={profile.cv} target="_blank" rel="noreferrer">View CV <span aria-hidden="true">↗</span></a>}
+              {profile.cv?.trim() && <a className="btn" href={profile.cv.trim()} download>Download CV <span aria-hidden="true">↓</span></a>}
             </div>
           </div>
           <div className="hero-art">
-            <div className="art-orbit orbit-one" aria-hidden="true" />
-            <div className="art-orbit orbit-two" aria-hidden="true" />
             <ProfilePortrait photoAvailable={photoAvailable} />
           </div>
           <a href={projects.length > 0 ? "#work" : "#about"} className="scroll-cue"><span aria-hidden="true" />Scroll to explore</a>
         </section>
 
+        {marqueeSkills.length > 0 && (
+          <section className="skill-marquee container" aria-label="Technology skills">
+            <div className="skill-marquee-window">
+              <div className="skill-marquee-track">
+                <ul className="skill-marquee-list">
+                  {marqueeSkills.map((skill) => <li key={skill}>{skill}</li>)}
+                </ul>
+                <ul className="skill-marquee-list" aria-hidden="true">
+                  {marqueeSkills.map((skill) => <li key={skill}>{skill}</li>)}
+                </ul>
+              </div>
+            </div>
+          </section>
+        )}
+
         {projects.length > 0 && (
-          <section id="work" className="section work-section" data-reveal>
+          <section id="work" className="section work-section container" data-reveal>
             <div className="section-heading">
               <p className="section-index">01 / Selected work</p>
-              <h2>Projects<span className="name-period">.</span></h2>
+              <h2><span className="section-heading-clip"><span>Projects<span className="name-period">.</span></span></span></h2>
               <p className="section-intro">A selection of things I have been building.</p>
             </div>
             <div className="projects">
               {projects.map((project, index) => (
-                <ProjectCard key={project.title} project={project} index={index} projectCount={projects.length} />
+                <ProjectCard key={project.title} project={project} index={index} />
               ))}
             </div>
           </section>
         )}
 
-        <section id="about" className="section about-section" data-reveal>
+        <section id="about" className="section about-section container" data-reveal>
           <div className="section-heading">
             <p className="section-index">{String(aboutIndex).padStart(2, "0")} / A little about me</p>
-            <h2>About<span className="name-period">.</span></h2>
+            <h2><span className="section-heading-clip"><span>About<span className="name-period">.</span></span></span></h2>
           </div>
           <div className="about-bento">
-            <article className="about-card about-card-intro">
+            <article className="about-card about-card-intro" data-reveal>
               <p className="about-copy">{profile.about}</p>
             </article>
             {Object.values(skills).some((items) => items.length > 0) && (
-              <article className="about-card about-card-skills">
+              <article className="about-card about-card-skills" data-reveal>
                 <h3>Skills</h3>
                 <div className="skill-groups">
                   {Object.entries(skills).filter(([, items]) => items.length > 0).map(([category, items]) => (
@@ -110,7 +133,7 @@ export default function Home() {
               </article>
             )}
             {education.length > 0 && (
-              <article className="about-card about-card-education">
+              <article className="about-card about-card-education" data-reveal>
                 <h3>Education</h3>
                 <ol className="education-timeline">
                   {education.map((item) => (
@@ -126,10 +149,10 @@ export default function Home() {
         </section>
 
         {experience.length > 0 && (
-          <section id="experience" className="section" data-reveal>
+          <section id="experience" className="section container" data-reveal>
             <div className="section-heading">
               <p className="section-index">{String(experienceIndex).padStart(2, "0")} / Practical experience</p>
-              <h2>Experience<span className="name-period">.</span></h2>
+              <h2><span className="section-heading-clip"><span>Experience<span className="name-period">.</span></span></span></h2>
             </div>
             <ol className="education-timeline">
               {experience.map((item) => (
@@ -143,10 +166,10 @@ export default function Home() {
         )}
 
         {certifications.length > 0 && (
-          <section id="certifications" className="section" data-reveal>
+          <section id="certifications" className="section container" data-reveal>
             <div className="section-heading">
               <p className="section-index">{String(certificationsIndex).padStart(2, "0")} / Verified credentials</p>
-              <h2>Certifications<span className="name-period">.</span></h2>
+              <h2><span className="section-heading-clip"><span>Certifications<span className="name-period">.</span></span></span></h2>
             </div>
             <ul className="education-timeline">
               {certifications.map((certification) => (
@@ -162,12 +185,13 @@ export default function Home() {
           </section>
         )}
 
-        <section id="contact" className="contact-section" data-reveal>
-          <p className="section-index">{String(contactIndex).padStart(2, "0")} / Get in touch</p>
-          <h2>Let&apos;s work<br />together<span className="name-period">.</span></h2>
-          {profile.availability.trim() && <p className="availability">{profile.availability}</p>}
-          <div className="contact-options">
-            <div className="contact-details">
+        <section id="contact" className="contact-section container" data-reveal>
+          <div className="contact-content">
+            <p className="section-index">{String(contactIndex).padStart(2, "0")} / Get in touch</p>
+            <h2>Let&apos;s work<br />together<span className="name-period">.</span></h2>
+            {profile.availability.trim() && <p className="availability">{profile.availability}</p>}
+            <div className="contact-options">
+              <div className="contact-details">
               {profile.email && (
                 <div className="contact-row">
                   <span className="contact-email">{profile.email}</span>
@@ -180,8 +204,8 @@ export default function Home() {
                   <CopyPhoneButton phone={localPhone} />
                 </div>
               )}
-            </div>
-            <div className="contact-actions">
+              </div>
+              <div className="contact-actions">
               {profile.email && (
                 <a className="contact-link" href={`mailto:${profile.email}`}>
                   Email me <span aria-hidden="true">↗</span>
@@ -189,10 +213,10 @@ export default function Home() {
               )}
               {contactPhone && (
                 <>
-                  <a className="contact-link" href={`tel:${contactPhone}`} aria-label={`Call Betesfa Mengesh at ${contactPhone}`}>
+                  <a className="contact-link" href={`tel:${internationalPhone}`} aria-label={`Call Betesfa Mengesh at ${internationalPhone}`}>
                     Call <span aria-hidden="true">↗</span>
                   </a>
-                  <a className="contact-link" href={`sms:${contactPhone}`} aria-label={`Send an SMS to Betesfa Mengesh at ${contactPhone}`}>
+                  <a className="contact-link" href={`sms:${internationalPhone}`} aria-label={`Send an SMS to Betesfa Mengesh at ${internationalPhone}`}>
                     SMS <span aria-hidden="true">↗</span>
                   </a>
                 </>
@@ -217,14 +241,15 @@ export default function Home() {
                   LinkedIn <span aria-hidden="true">↗</span>
                 </a>
               )}
+              </div>
             </div>
+            {(profile.location || profile.mapUrl) && (
+              <div className="location-details">
+                {profile.location && <span>{profile.location}</span>}
+                {profile.mapUrl && <a href={profile.mapUrl} target="_blank" rel="noreferrer">View on map <span aria-hidden="true">↗</span></a>}
+              </div>
+            )}
           </div>
-          {(profile.location || profile.mapUrl) && (
-            <div className="location-details">
-              {profile.location && <span>{profile.location}</span>}
-              {profile.mapUrl && <a href={profile.mapUrl} target="_blank" rel="noreferrer">View on map <span aria-hidden="true">↗</span></a>}
-            </div>
-          )}
         </section>
 
         <script
@@ -233,7 +258,7 @@ export default function Home() {
         />
       </main>
 
-      <footer className="foot">
+      <footer className="foot container">
         <span>© {new Date().getFullYear()} {profile.name}</span>
         <a href="#top">Back to top ↑</a>
       </footer>

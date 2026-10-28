@@ -3,6 +3,7 @@ export type Project = {
   year: string;
   title: string;
   role: string;
+  status?: string;
   overview?: string;
   problem?: string;
   result?: string;
@@ -39,7 +40,7 @@ export const profile = {
   about:
     "4th-year Software Engineering student at Injibara University. I take ideas from understanding the problem all the way to a working product, with a focus on simplicity, speed and accessibility.",
   email: "mengeshabetesfa2@gmail.com",
-  cv: undefined,
+  cv: "",
   // Optional: one availability sentence and a LinkedIn profile URL; keep empty until provided.
   availability: "",
   linkedin: "",
