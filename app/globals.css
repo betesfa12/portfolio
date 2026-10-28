@@ -253,11 +253,15 @@ h1, h2, h3 { font-family: var(--font-display), var(--font-body), sans-serif; lin
 }
 .name-period { color: #7da64e; }
 .hero-name .name-period {
+  display: inline-block;
+  width: .12em;
+  height: .12em;
+  aspect-ratio: 1;
+  margin-left: .015em;
+  border-radius: 50%;
   background: linear-gradient(120deg, #70a83c 0%, #c8fa8a 46%, #70a83c 70%);
   background-size: 220% 100%;
-  background-clip: text;
-  color: transparent;
-  -webkit-text-fill-color: transparent;
+  vertical-align: .04em;
   animation: accent-dot-sweep 4s ease-in-out infinite;
 }
 @keyframes accent-dot-sweep {
@@ -516,8 +520,9 @@ h1, h2, h3 { font-family: var(--font-display), var(--font-body), sans-serif; lin
 .section-heading { position: relative; display: grid; grid-template-columns: 1fr 1fr; align-items: end; row-gap: 14px; margin-bottom: 42px; }
 .section-index { grid-column: 1 / -1; }
 .section-heading h2, .contact-section h2 { font-size: clamp(3rem, 6vw, 5.8rem); letter-spacing: -.07em; }
-.work-section .section-heading h2 { margin-bottom: clamp(1.5rem, 3vw, 2.5rem); }
-.section-intro { justify-self: end; color: var(--muted); font-size: var(--text-small); }
+.work-section .section-heading { align-items: end; }
+.work-section .section-heading h2 { margin-bottom: 0; }
+.section-intro { align-self: end; justify-self: end; margin-bottom: .12em; color: var(--muted); font-size: var(--text-small); text-align: right; }
 .projects { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
 .project-card {
   position: relative;
@@ -714,12 +719,12 @@ h1, h2, h3 { font-family: var(--font-display), var(--font-body), sans-serif; lin
   position: absolute;
   z-index: 0;
   top: 50%;
-  right: calc(var(--container-pad) + clamp(6rem, 8vw, 9rem));
+  right: calc(var(--container-pad) + 48px);
   width: clamp(260px, 30vw, 520px);
   aspect-ratio: 1;
   border: 1px solid transparent;
   border-radius: 50%;
-  background: conic-gradient(from 0deg, transparent 0 28%, rgb(181 237 112 / 24%) 42%, #b5ed70 53%, rgb(181 237 112 / 30%) 63%, transparent 78%) border-box;
+  background: conic-gradient(from 0deg, #b5ed70, rgb(181 237 112 / 72%), #b5ed70, rgb(181 237 112 / 76%), #b5ed70) border-box;
   box-shadow: 0 0 0 18px rgb(181 237 112 / 3%), 0 0 38px rgb(181 237 112 / 14%);
   content: "";
   pointer-events: none;
@@ -737,11 +742,11 @@ h1, h2, h3 { font-family: var(--font-display), var(--font-body), sans-serif; lin
   position: relative;
   z-index: 1;
   padding: clamp(1.5rem, 4vw, 4rem);
-  border: 1px solid transparent;
+  border: 1px solid rgb(181 237 112 / 30%);
   border-radius: 24px;
   background:
     radial-gradient(circle 300px at var(--mx, -1000px) var(--my, -1000px), rgb(181 237 112 / 13%), transparent 100%) padding-box,
-    linear-gradient(135deg, rgb(181 237 112 / 11%), rgb(13 26 16 / 12%) 48%, transparent) border-box;
+    linear-gradient(135deg, rgb(181 237 112 / 11%), rgb(13 26 16 / 12%) 48%, transparent) padding-box;
 }
 .contact-content::before {
   position: absolute;
@@ -779,9 +784,10 @@ h1, h2, h3 { font-family: var(--font-display), var(--font-body), sans-serif; lin
 :root[data-theme="dark"] .contact-section { color: #f0f7ec; }
 :root[data-theme="dark"] .contact-section::before { border-color: rgb(181 237 112 / 48%); background: #122018; box-shadow: 0 16px 54px rgb(0 0 0 / 28%), 0 0 38px rgb(181 237 112 / 12%); }
 :root[data-theme="dark"] .contact-content {
+  border-color: rgb(181 237 112 / 48%);
   background:
     radial-gradient(circle 300px at var(--mx, -1000px) var(--my, -1000px), rgb(181 237 112 / 17%), transparent 100%) padding-box,
-    linear-gradient(135deg, rgb(181 237 112 / 58%), rgb(195 208 198 / 8%) 48%, transparent) border-box;
+    linear-gradient(135deg, rgb(181 237 112 / 58%), rgb(195 208 198 / 8%) 48%, transparent) padding-box;
 }
 :root[data-theme="dark"] .contact-content::before { background: linear-gradient(115deg, transparent 22%, rgb(181 237 112 / 9%) 48%, transparent 72%); }
 :root[data-theme="dark"] .contact-section .section-index,
@@ -892,8 +898,7 @@ h1, h2, h3 { font-family: var(--font-display), var(--font-body), sans-serif; lin
   .primary-navigation.is-open { gap: 6px 8px; }
   .toggle { padding: 8px 12px; font-size: var(--text-control); }
   .contact-section::after {
-    right: calc(var(--container-pad) + 4.5rem);
-    width: clamp(180px, 52vw, 240px);
+    right: calc(var(--container-pad) + 48px);
     box-shadow: 0 0 0 12px rgb(181 237 112 / 3%), 0 0 0 24px rgb(181 237 112 / 2%);
   }
   .hero { padding-top: 70px; }
