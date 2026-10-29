@@ -99,7 +99,8 @@ export default function ProjectGallery({
                 alt={screenshot.alt}
                 width={1600}
                 height={900}
-                loading="lazy"
+                loading="eager"
+                unoptimized
               />
               <span className="project-gallery-zoom" aria-hidden="true">View</span>
             </button>

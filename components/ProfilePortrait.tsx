@@ -22,10 +22,15 @@ export default function ProfilePortrait({ photoAvailable }: { photoAvailable: bo
     const bounds = group.getBoundingClientRect();
     const x = (event.clientX - bounds.left) / bounds.width * 2 - 1;
     const y = (event.clientY - bounds.top) / bounds.height * 2 - 1;
+    const mx = ((event.clientX - bounds.left) / bounds.width) * 100;
+    const my = ((event.clientY - bounds.top) / bounds.height) * 100;
 
     if (frameRef.current !== null) cancelAnimationFrame(frameRef.current);
     frameRef.current = requestAnimationFrame(() => {
-      group.style.transform = `rotateX(${y * -8}deg) rotateY(${x * 8}deg)`;
+      group.style.setProperty("--orb-rx", `${y * -6}deg`);
+      group.style.setProperty("--orb-ry", `${x * 6}deg`);
+      group.style.setProperty("--orb-mx", `${mx}%`);
+      group.style.setProperty("--orb-my", `${my}%`);
       frameRef.current = null;
     });
   }
@@ -33,7 +38,12 @@ export default function ProfilePortrait({ photoAvailable }: { photoAvailable: bo
   function handlePointerLeave() {
     if (frameRef.current !== null) cancelAnimationFrame(frameRef.current);
     frameRef.current = null;
-    if (groupRef.current) groupRef.current.style.transform = "";
+    if (groupRef.current) {
+      groupRef.current.style.setProperty("--orb-rx", "0deg");
+      groupRef.current.style.setProperty("--orb-ry", "0deg");
+      groupRef.current.style.removeProperty("--orb-mx");
+      groupRef.current.style.removeProperty("--orb-my");
+    }
   }
 
   return (
@@ -58,7 +68,7 @@ export default function ProfilePortrait({ photoAvailable }: { photoAvailable: bo
           ) : (
             <Image
               src="/photo.jpg"
-              alt="Portrait of Betesfa Mengesh"
+              alt="Portrait of Betesfa Mengesha"
               fill
               sizes="(max-width: 560px) 54vw, (max-width: 800px) 290px, 31vw"
               className="profile-photo"

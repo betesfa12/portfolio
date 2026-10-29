@@ -23,10 +23,12 @@ const personJsonLd = {
   sameAs: [...profile.socials.map((social) => social.href), ...(profile.linkedin.trim() ? [profile.linkedin] : [])],
 };
 
-const aboutIndex = projects.length > 0 ? 2 : 1;
-const experienceIndex = aboutIndex + 1;
-const certificationsIndex = experienceIndex + (experience.length > 0 ? 1 : 0);
-const contactIndex = certificationsIndex + (certifications.length > 0 ? 1 : 0);
+const aboutIndex = 1;
+const projectsIndex = 2;
+const skillsIndex = 3;
+const contactIndex = 4;
+const experienceIndex = 5;
+const certificationsIndex = 6;
 const contactPhone = profile.phone.trim();
 const localPhone = contactPhone.replace(/^\+251/, "0");
 const formattedPhone = localPhone.replace(/^(\d{4})(\d{3})(\d{3})$/, "$1 $2 $3");
@@ -59,8 +61,8 @@ export default function Home() {
           <div className="hero-copy">
             <p className="eyebrow"><span className="eyebrow-dot" />{profile.title}</p>
             <h1 className="hero-name">
-              <span className="hero-name-line"><span>{firstName}{!lastName && <span className="name-period">.</span>}</span></span>
-              {lastName && <span className="hero-name-line"><span>{lastName}<span className="name-period">.</span></span></span>}
+              <span className="hero-name-line"><span>{firstName}{!lastName && <span className="name-period" aria-hidden="true" />}</span></span>
+              {lastName && <span className="hero-name-line"><span>{lastName}<span className="name-period" aria-hidden="true" /></span></span>}
             </h1>
             <p className="tagline">{profile.tagline}</p>
             {profile.location && <p className="location">{profile.location}</p>}
@@ -93,45 +95,15 @@ export default function Home() {
           </section>
         )}
 
-        {projects.length > 0 && (
-          <section id="work" className="section work-section container" data-reveal>
-            <div className="section-heading">
-              <p className="section-index">01 / Selected work</p>
-              <h2><span className="section-heading-clip"><span>Projects<span className="name-period">.</span></span></span></h2>
-              <p className="section-intro">A selection of things I have been building.</p>
-            </div>
-            <div className="projects">
-              {projects.map((project, index) => (
-                <ProjectCard key={project.title} project={project} index={index} />
-              ))}
-            </div>
-          </section>
-        )}
-
         <section id="about" className="section about-section container" data-reveal>
           <div className="section-heading">
             <p className="section-index">{String(aboutIndex).padStart(2, "0")} / A little about me</p>
-            <h2><span className="section-heading-clip"><span>About<span className="name-period">.</span></span></span></h2>
+            <h2><span className="section-heading-clip"><span>About<span className="name-period" aria-hidden="true" /></span></span></h2>
           </div>
           <div className="about-bento">
             <article className="about-card about-card-intro" data-reveal>
               <p className="about-copy">{profile.about}</p>
             </article>
-            {Object.values(skills).some((items) => items.length > 0) && (
-              <article className="about-card about-card-skills" data-reveal>
-                <h3>Skills</h3>
-                <div className="skill-groups">
-                  {Object.entries(skills).filter(([, items]) => items.length > 0).map(([category, items]) => (
-                    <section className="skill-group" key={category} aria-label={`${category} skills`}>
-                      <h4>{category}</h4>
-                      <ul className="skill-list">
-                        {items.map((skill) => <li key={skill}>{skill}</li>)}
-                      </ul>
-                    </section>
-                  ))}
-                </div>
-              </article>
-            )}
             {education.length > 0 && (
               <article className="about-card about-card-education" data-reveal>
                 <h3>Education</h3>
@@ -148,11 +120,45 @@ export default function Home() {
           </div>
         </section>
 
+        {projects.length > 0 && (
+          <section id="work" className="section work-section container" data-reveal>
+            <div className="section-heading">
+              <p className="section-index">{String(projectsIndex).padStart(2, "0")} / Selected work</p>
+              <h2><span className="section-heading-clip"><span>Projects<span className="name-period" aria-hidden="true" /></span></span></h2>
+              <p className="section-intro">A selection of things I have been building.</p>
+            </div>
+            <div className="projects">
+              {projects.map((project, index) => (
+                <ProjectCard key={project.title} project={project} index={index} />
+              ))}
+            </div>
+          </section>
+        )}
+
+        {Object.values(skills).some((items) => items.length > 0) && (
+          <section id="skills" className="section skills-section container" data-reveal>
+            <div className="section-heading">
+              <p className="section-index">{String(skillsIndex).padStart(2, "0")} / Skills</p>
+              <h2><span className="section-heading-clip"><span>Skills<span className="name-period" aria-hidden="true" /></span></span></h2>
+            </div>
+            <div className="skills-grid">
+              {Object.entries(skills).filter(([, items]) => items.length > 0).map(([category, items]) => (
+                <article className="about-card skill-card" data-reveal key={category}>
+                  <h3>{category}</h3>
+                  <ul className="skill-list">
+                    {items.map((skill) => <li key={skill}>{skill}</li>)}
+                  </ul>
+                </article>
+              ))}
+            </div>
+          </section>
+        )}
+
         {experience.length > 0 && (
           <section id="experience" className="section container" data-reveal>
             <div className="section-heading">
               <p className="section-index">{String(experienceIndex).padStart(2, "0")} / Practical experience</p>
-              <h2><span className="section-heading-clip"><span>Experience<span className="name-period">.</span></span></span></h2>
+              <h2><span className="section-heading-clip"><span>Experience<span className="name-period" aria-hidden="true" /></span></span></h2>
             </div>
             <ol className="education-timeline">
               {experience.map((item) => (
@@ -169,7 +175,7 @@ export default function Home() {
           <section id="certifications" className="section container" data-reveal>
             <div className="section-heading">
               <p className="section-index">{String(certificationsIndex).padStart(2, "0")} / Verified credentials</p>
-              <h2><span className="section-heading-clip"><span>Certifications<span className="name-period">.</span></span></span></h2>
+              <h2><span className="section-heading-clip"><span>Certifications<span className="name-period" aria-hidden="true" /></span></span></h2>
             </div>
             <ul className="education-timeline">
               {certifications.map((certification) => (
@@ -187,8 +193,16 @@ export default function Home() {
 
         <section id="contact" className="contact-section container" data-reveal>
           <div className="contact-content">
+            <span className="contact-blob contact-blob-one" aria-hidden="true" />
+            <span className="contact-blob contact-blob-two" aria-hidden="true" />
+            <span className="contact-ring" aria-hidden="true">
+              <span className="contact-ring-inner" />
+              <span className="contact-ring-outer" />
+              <span className="contact-ring-orbit"><span /></span>
+              <span className="contact-ring-orb" aria-hidden="true">BM</span>
+            </span>
             <p className="section-index">{String(contactIndex).padStart(2, "0")} / Get in touch</p>
-            <h2>Let&apos;s work<br />together<span className="name-period">.</span></h2>
+            <h2>Let&apos;s work<br />together<span className="name-period" aria-hidden="true" /></h2>
             {profile.availability.trim() && <p className="availability">{profile.availability}</p>}
             <div className="contact-options">
               <div className="contact-details">
@@ -213,21 +227,21 @@ export default function Home() {
               )}
               {contactPhone && (
                 <>
-                  <a className="contact-link" href={`tel:${internationalPhone}`} aria-label={`Call Betesfa Mengesh at ${internationalPhone}`}>
+                  <a className="contact-link" href={`tel:${internationalPhone}`} aria-label={`Call Betesfa Mengesha at ${internationalPhone}`}>
                     Call <span aria-hidden="true">↗</span>
                   </a>
-                  <a className="contact-link" href={`sms:${internationalPhone}`} aria-label={`Send an SMS to Betesfa Mengesh at ${internationalPhone}`}>
+                  <a className="contact-link" href={`sms:${internationalPhone}`} aria-label={`Send an SMS to Betesfa Mengesha at ${internationalPhone}`}>
                     SMS <span aria-hidden="true">↗</span>
                   </a>
                 </>
               )}
               {whatsappNumber && (
-                <a className="contact-link" href={`https://wa.me/${whatsappNumber}`} target="_blank" rel="noopener noreferrer" aria-label="Message Betesfa Mengesh on WhatsApp">
+                <a className="contact-link" href={`https://wa.me/${whatsappNumber}`} target="_blank" rel="noopener noreferrer" aria-label="Message Betesfa Mengesha on WhatsApp">
                   WhatsApp <span aria-hidden="true">↗</span>
                 </a>
               )}
               {telegramUsername && (
-                <a className="contact-link" href={`https://t.me/${telegramUsername}`} target="_blank" rel="noopener noreferrer" aria-label="Message Betesfa Mengesh on Telegram">
+                <a className="contact-link" href={`https://t.me/${telegramUsername}`} target="_blank" rel="noopener noreferrer" aria-label="Message Betesfa Mengesha on Telegram">
                   Telegram <span aria-hidden="true">↗</span>
                 </a>
               )}

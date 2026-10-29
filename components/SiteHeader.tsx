@@ -7,8 +7,9 @@ import TextSizeControl from "@/components/TextSizeControl";
 import { certifications, experience, profile, projects } from "@/lib/data";
 
 const sections = [
-  ...(projects.length > 0 ? [{ id: "work", label: "Projects" }] : []),
   { id: "about", label: "About" },
+  ...(projects.length > 0 ? [{ id: "work", label: "Projects" }] : []),
+  { id: "skills", label: "Skills" },
   ...(experience.length > 0 ? [{ id: "experience", label: "Experience" }] : []),
   ...(certifications.length > 0 ? [{ id: "certifications", label: "Certifications" }] : []),
   { id: "contact", label: "Contact" },
@@ -70,7 +71,7 @@ export default function SiteHeader() {
       frame = requestAnimationFrame(() => {
         const scrollableHeight = document.documentElement.scrollHeight - window.innerHeight;
         const progress = scrollableHeight > 0 ? window.scrollY / scrollableHeight : 0;
-        document.querySelector(".bar")?.classList.toggle("is-scrolled", window.scrollY > 8);
+        document.querySelector(".bar")?.classList.toggle("is-scrolled", window.scrollY > 24);
         progressRef.current?.style.setProperty("transform", `scaleX(${Math.min(1, Math.max(0, progress))})`);
       });
     }

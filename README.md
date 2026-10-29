@@ -1,4 +1,4 @@
-# Betesfa Mengesh — Portfolio
+# Betesfa Mengesha — Portfolio
 
 A personal portfolio built with Next.js, React, TypeScript, and CSS. It presents profile information, selected work, skills, education, and contact links.
 

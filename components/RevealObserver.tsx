@@ -33,10 +33,18 @@ export default function RevealObserver() {
         element.dataset.revealed = "true";
       });
       observer.disconnect();
-    }, 2500);
+    }, 1200);
+
+    const imageFallback = window.setTimeout(() => {
+      document.querySelectorAll<HTMLImageElement>(".project-gallery-trigger img, .project-lightbox-media img").forEach((image) => {
+        image.style.opacity = "1";
+        image.style.visibility = "visible";
+      });
+    }, 1200);
 
     return () => {
       window.clearTimeout(revealFallback);
+      window.clearTimeout(imageFallback);
       observer.disconnect();
       delete document.documentElement.dataset.revealReady;
     };
@@ -48,9 +56,9 @@ export default function RevealObserver() {
     ) return;
 
     const spotlightTargets = document.querySelectorAll<HTMLElement>(
-      ".project-card, .about-card, .contact-content",
+      ".project-card, .about-card, .skill-card, .contact-content",
     );
-    const magneticTargets = document.querySelectorAll<HTMLElement>(".hero .btn.primary");
+    const magneticTargets = document.querySelectorAll<HTMLElement>(".hero .btn.primary, .hero .text-link, .contact-link");
     const cleanup: (() => void)[] = [];
 
     spotlightTargets.forEach((target) => {
@@ -84,18 +92,25 @@ export default function RevealObserver() {
     });
 
     magneticTargets.forEach((target) => {
+      let frame: number | null = null;
       const move = (event: PointerEvent) => {
         if (
           event.pointerType === "touch" ||
           window.matchMedia("(pointer: coarse), (prefers-reduced-motion: reduce)").matches
         ) return;
-        const bounds = target.getBoundingClientRect();
-        const x = (event.clientX - bounds.left) / bounds.width - .5;
-        const y = (event.clientY - bounds.top) / bounds.height - .5;
-        target.style.setProperty("--mag-x", `${x * 12}px`);
-        target.style.setProperty("--mag-y", `${y * 12}px`);
+        if (frame !== null) cancelAnimationFrame(frame);
+        frame = requestAnimationFrame(() => {
+          const bounds = target.getBoundingClientRect();
+          const x = (event.clientX - bounds.left) / bounds.width - .5;
+          const y = (event.clientY - bounds.top) / bounds.height - .5;
+          target.style.setProperty("--mag-x", `${x * 6}px`);
+          target.style.setProperty("--mag-y", `${y * 6}px`);
+          frame = null;
+        });
       };
       const leave = () => {
+        if (frame !== null) cancelAnimationFrame(frame);
+        frame = null;
         target.style.removeProperty("--mag-x");
         target.style.removeProperty("--mag-y");
       };

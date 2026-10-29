@@ -34,7 +34,7 @@ export type Certification = {
 };
 
 export const profile = {
-  name: "Betesfa Mengesh",
+  name: "Betesfa Mengesha",
   title: "Software Engineering Student",
   tagline: "I build fast, clean and simple digital products for real people.",
   about:

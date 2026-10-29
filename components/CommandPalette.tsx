@@ -79,8 +79,9 @@ export default function CommandPalette({ hasProjects, email, phone, whatsapp, on
   }
 
   const commands = [
-    ...(hasProjects ? [{ label: "Projects", action: () => navigateTo("work") }] : []),
     { label: "About", action: () => navigateTo("about") },
+    ...(hasProjects ? [{ label: "Projects", action: () => navigateTo("work") }] : []),
+    { label: "Skills", action: () => navigateTo("skills") },
     { label: "Contact", action: () => navigateTo("contact") },
     { label: "Toggle dark mode", action: () => { onToggleTheme(); closePalette(); } },
     ...(phone ? [{ label: "Call", action: () => { closePalette(); window.location.href = `tel:${phone}`; } }] : []),
